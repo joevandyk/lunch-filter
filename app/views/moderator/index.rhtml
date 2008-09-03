@@ -1,0 +1,43 @@
+<fieldset class="alignLeft">
+	<legend><%=current_user.login.capitalize %>'s Control Panel</legend>
+
+	<div class="width50 floatLeft">
+		<h2>Manage Cuisines</h2>
+		<p><a href="javascript:Element.toggle('create_cuisine_form')">Add a New Cuisine</a></p>
+		<div id="create_cuisine_form" style="margin-left: 20px; display: none;">
+			<%= start_form_tag :action=>"create_cuisine" %>
+				<label>Cuisine Name</label><br /><%= text_field("cuisine", "name", :size=>25) %><br />
+				<%= submit_tag "Add Cuisine" %>
+			<%= end_form_tag %>
+		</div>
+		<div id="manageCuisines">
+		<% unless @cuisines.empty? %>
+			<% for cuisine in @cuisines %>
+				<p><%= cuisine.name %> [ <%=link_to "edit", :action=>"edit_cuisine",:id=>cuisine.id %> ] [ <%=link_to "delete", :action=>"destroy_cuisine",:id=>cuisine.id %> ]</p>
+			<% end %>
+		<% end %>
+		</div>
+	</div>
+
+	<!-- loop through all streets and restaurants - manage restaurants should be moved here-->
+	<div class="width50 floatLeft">
+		
+		<div id="manageStreets">
+			<h2>Manage Cities</h2>
+			<% for city in @cities %>
+				<h3><%= city.name %> [ edit ] [ delete ]</h3>
+				<div style="padding-left: 30px;">
+					<p><b>Manage Streets</b> - <%=link_to("Add a New Street", :action=>"create_street", :city=>city.id)%></p>
+			
+					<% for street in city.streets %>
+						<p><%= link_to street.name, :controller=>"restaurant", :action=>"list", :id=>street.url_name, :city=>street.city.name %> [ <%=link_to("edit", :action=>"edit_street", :id=>street.id)%> ] [ <%=link_to "delete", :action=>"destroy_street",:id=>street.id %> ]</p>
+						<%#= render :partial=> "/restaurant/restaurants", :locals=> {:restaurants=>street.restaurants} %>
+						<p style="margin-left: 20px;"><%=link_to "Add a New Restaurant", :controller=>"restaurant", :action=>"create_restaurant", :id=>street.id%></a></p>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<div class="clearBoth"></div>
+	<p><%= link_to "Manage Flagged Restaurants", :controller=>"restaurant", :action=>"flagged"%></p>
+</fieldset>

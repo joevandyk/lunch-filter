@@ -1,0 +1,9 @@
+<label>Name</label><br /><%= text_field("street", "name") %><br />
+<label>Description</label><br /><%= text_area("street", "description", :rows=>"5") %><br />
+<label>URL Short Name</label><br /><%= text_field("street", "url_name") %><br />
+<label>Neighborhood URL</label><br /><%= text_field("street", "neighborhood_url") %><br />
+<% if @city_id %>
+	<label>City Name</label><br /><%= select_tag "street[city_id]", options_from_collection_for_select(@cities, "id", "name", @city_id) %><br />
+<% else %>
+	<%= hidden_field("street", "city_id", :value=>"#{params[:city]}") %>
+<% end %>

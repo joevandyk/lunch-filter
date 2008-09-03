@@ -1,0 +1,11 @@
+
+
+<fieldset class="alignLeft">
+<legend>Add a New Street</legend>
+	<%= start_form_tag :action=>"create_street" %>
+		<%= render :partial => "street_form" %>
+		<%= submit_tag "Add Street" %>
+	<%= end_form_tag %>
+</fieldset>
+
+<p><%=link_to "back", :controller=>"moderator" %></p>

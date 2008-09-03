@@ -1,0 +1,11 @@
+<h1>Welcome to LunchFilter!</h1>
+
+<h2>Cities</h2>
+<% for city in @cities %>
+	<h3>Streets in <%= city.name %></h3>
+	<div style="padding-left: 30px;">
+		<% for street in city.streets %>
+			<p><%= link_to street.name, :controller=>"restaurant", :action=>"list", :id=>street.url_name, :city=>street.city.name %></p>
+		<% end %>
+	</div>
+<% end %>

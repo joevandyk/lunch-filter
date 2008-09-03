@@ -1,0 +1,2406 @@
+<!--####
+	Project: LunchFilter.com 
+		Started Design: January 1, 2007
+		Started Development: January 18, 2007
+		First Street ("The Ave") Launched: March 18, 2007
+			
+	Description: LunchFilter A tool for deciding where to eat on selected urban streets.
+	
+	Team: 
+	     CSS/Graphics Ninja: Adam Hindman
+	     Ruby on Rails/JS Gangsta: Jordan Isip
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+	<head>
+		<title>LunchFilter</title>
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<script src="/javascripts/prototype.js?1220401953" type="text/javascript"></script>
+<script src="/javascripts/effects.js?1220401954" type="text/javascript"></script>
+<script src="/javascripts/dragdrop.js?1220401954" type="text/javascript"></script>
+<script src="/javascripts/controls.js?1220401955" type="text/javascript"></script>
+<script src="/javascripts/nicetitles.js?1220401954" type="text/javascript"></script>
+<script src="/javascripts/application.js?1220401953" type="text/javascript"></script>
+		<link href="/stylesheets/lunchfilter.css?1220401956" media="screen" rel="Stylesheet" type="text/css" />
+<link href="/stylesheets/home.css?1220401956" media="screen" rel="Stylesheet" type="text/css" />
+<link href="/stylesheets/about.css?1220401955" media="screen" rel="Stylesheet" type="text/css" />
+
+		<style type="text/css">
+		<!--
+		img{
+			border: 0;
+		}
+		div.nicetitle {
+			background-color: #456476;
+			color: #fff;
+			font: bold 13px "Trebuchet MS", Verdana, Arial, sans-serif;
+			left: 0;
+			padding: 4px;
+			position: absolute;
+			top: 0;
+			width: 25em;
+			z-index: 20;
+			-moz-border-radius-bottomleft: 10px;
+			-moz-border-radius-bottomright: 10px;
+			-moz-border-radius-topleft: 0;
+			-moz-border-radius-topright: 10px;
+			-moz-opacity: .87;
+			}
+
+		div.nicetitle p {
+		    margin: 0;
+			padding: 0 3px;
+			-moz-opacity: 1;
+		}
+
+		div.nicetitle p.destination {
+		    font-size: 9px;
+		    padding-top: 3px;
+			text-align: left;
+			-moz-opacity: 1;
+		}
+
+		div.nicetitle p span.accesskey {
+			color: #d17e62;
+		}
+		-->
+		</style>
+	</head>
+	<body>
+		<div id="slate">
+			
+			
+			
+			
+			
+<link href="/stylesheets/theave.css?1220401956" media="screen" rel="Stylesheet" type="text/css" />
+
+<div id="menu" class="clearfix">
+	<div id="menu-inside">		
+		<div id="logobox">
+			<h1><a href="/"><img alt="Lf_logo" border="0" src="/images/LF_logo.gif?1220401937" /><img alt="Lunchfilter" border="0" src="/images/lunchfilter.gif?1220401937" /></a></h1>
+	    </div>
+		<div id="breadcrumbs">
+		<p><a href="/">LunchFilter</a> &raquo; <a href="/cities/Seattle">Seattle</a> &raquo; <b>The Ave</b></p>
+			<!--
+			<p id="top">Where you at? </p>-->
+
+			<p><small>"The Ave", officially "University Way NE", is located in the University District in northeast Seattle, Washington. The Ave is the commercial heart of the U. District and the off-campus extension of the University of Washington (UW). The Ave has gradually turned into what now resembles an eight-block-long global food court.</small></p>
+		</div>
+		<div id="filters">
+			<h2><span class="menu-header">What do you feel like eating?</span></h2>
+			<!--<form id="filter_form" class="selector">-->
+			<form action="/restaurant/find_random_restaurant?street=1" class="selector" id="filter_form" method="post" onsubmit="new Ajax.Request('/restaurant/find_random_restaurant?street=1', {asynchronous:true, evalScripts:true, onComplete:function(request){Filter.complete()}, onLoading:function(request){Filter.loading()}, parameters:Form.serialize(this)}); return false;">
+				
+					<label><input type="checkbox" 
+						id="2"
+						name="cuisine_ids[]"
+						value="2"
+						
+					/>American</label>
+				
+					<label><input type="checkbox" 
+						id="4"
+						name="cuisine_ids[]"
+						value="4"
+						
+					/>Bakery</label>
+				
+					<label><input type="checkbox" 
+						id="5"
+						name="cuisine_ids[]"
+						value="5"
+						
+					/>Barbecue</label>
+				
+					<label><input type="checkbox" 
+						id="34"
+						name="cuisine_ids[]"
+						value="34"
+						
+					/>Bubble Tea</label>
+				
+					<label><input type="checkbox" 
+						id="6"
+						name="cuisine_ids[]"
+						value="6"
+						
+					/>Burger Joint</label>
+				
+					<label><input type="checkbox" 
+						id="8"
+						name="cuisine_ids[]"
+						value="8"
+						
+					/>Caribbean</label>
+				
+					<label><input type="checkbox" 
+						id="9"
+						name="cuisine_ids[]"
+						value="9"
+						
+					/>Chinese</label>
+				
+					<label><input type="checkbox" 
+						id="7"
+						name="cuisine_ids[]"
+						value="7"
+						
+					/>Coffee Shop</label>
+				
+					<label><input type="checkbox" 
+						id="11"
+						name="cuisine_ids[]"
+						value="11"
+						
+					/>Diner</label>
+				
+					<label><input type="checkbox" 
+						id="13"
+						name="cuisine_ids[]"
+						value="13"
+						
+					/>Filipino</label>
+				
+					<label><input type="checkbox" 
+						id="21"
+						name="cuisine_ids[]"
+						value="21"
+						
+					/>Greek</label>
+				
+					<label><input type="checkbox" 
+						id="14"
+						name="cuisine_ids[]"
+						value="14"
+						
+					/>Hawaiian</label>
+				
+					<label><input type="checkbox" 
+						id="31"
+						name="cuisine_ids[]"
+						value="31"
+						
+					/>Ice Cream</label>
+				
+					<label><input type="checkbox" 
+						id="16"
+						name="cuisine_ids[]"
+						value="16"
+						
+					/>Indian</label>
+				
+					<label><input type="checkbox" 
+						id="35"
+						name="cuisine_ids[]"
+						value="35"
+						
+					/>Indonesian</label>
+				
+					<label><input type="checkbox" 
+						id="17"
+						name="cuisine_ids[]"
+						value="17"
+						
+					/>Italian</label>
+				
+					<label><input type="checkbox" 
+						id="18"
+						name="cuisine_ids[]"
+						value="18"
+						
+					/>Japanese</label>
+				
+					<label><input type="checkbox" 
+						id="19"
+						name="cuisine_ids[]"
+						value="19"
+						
+					/>Korean</label>
+				
+					<label><input type="checkbox" 
+						id="22"
+						name="cuisine_ids[]"
+						value="22"
+						
+					/>Mexican</label>
+				
+					<label><input type="checkbox" 
+						id="23"
+						name="cuisine_ids[]"
+						value="23"
+						
+					/>Middle Eastern</label>
+				
+					<label><input type="checkbox" 
+						id="3"
+						name="cuisine_ids[]"
+						value="3"
+						
+					/>Pho</label>
+				
+					<label><input type="checkbox" 
+						id="33"
+						name="cuisine_ids[]"
+						value="33"
+						
+					/>Pizza</label>
+				
+					<label><input type="checkbox" 
+						id="24"
+						name="cuisine_ids[]"
+						value="24"
+						
+					/>Pub Grub</label>
+				
+					<label><input type="checkbox" 
+						id="30"
+						name="cuisine_ids[]"
+						value="30"
+						
+					/>Sandwiches</label>
+				
+					<label><input type="checkbox" 
+						id="1"
+						name="cuisine_ids[]"
+						value="1"
+						
+					/>Seafood</label>
+				
+					<label><input type="checkbox" 
+						id="26"
+						name="cuisine_ids[]"
+						value="26"
+						
+					/>Sushi</label>
+				
+					<label><input type="checkbox" 
+						id="36"
+						name="cuisine_ids[]"
+						value="36"
+						
+					/>Tea</label>
+				
+					<label><input type="checkbox" 
+						id="37"
+						name="cuisine_ids[]"
+						value="37"
+						
+					/>Teriyaki</label>
+				
+					<label><input type="checkbox" 
+						id="27"
+						name="cuisine_ids[]"
+						value="27"
+						
+					/>Thai</label>
+				
+					<label><input type="checkbox" 
+						id="28"
+						name="cuisine_ids[]"
+						value="28"
+						
+					/>Vegetarian</label>
+				
+					<label><input type="checkbox" 
+						id="29"
+						name="cuisine_ids[]"
+						value="29"
+						
+					/>Vietnamese</label>
+				
+				<p>
+					<small><a href="javascript:Filter.uncheckAll();">Uncheck All</a></small>
+					<small><a href="javascript:Filter.checkAll();">Check All</a></small>
+				</p>
+				
+				<div class="clearBoth"></div>
+				
+				<!-- divs manipulated by js -->
+				<div id="loading" style="display:none;"><img alt="Indicator" src="/images/indicator.gif?1220401947" /> Loading...</div>
+				<div id="log"><!-- exceptions are loaded here --></div>
+				
+				<p><input type="submit" value="I'm too hungry, pick for me!" /></p>
+				<div id="hungry"><!--suggestion loaded here--></div>
+				<!-- end manipulated divs -->
+
+				<script type="text/javascript">
+//<![CDATA[
+new Form.EventObserver('filter_form', function(element, value) {new Ajax.Updater({}, '/restaurant/update_filter?street=1', {asynchronous:true, evalScripts:true, onComplete:function(request){Filter.complete()}, onLoading:function(request){Filter.loading()}, parameters:value})})
+//]]>
+</script>
+			</form>
+			
+		</div>
+		<p></p>
+	</div><!--end menu inside-->
+</div><!-- end menu -->
+
+<div id="aveContainer"><!-- change id to just container to abstract to multiple streets-->
+  
+	  
+	
+		<div class="block" id="ave52nd">
+			
+				<div class="restaurant right 52nd" id="r42" style="top: 478px">
+					<a name="anchor42"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/42" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/dVQTURtUfe5F7aL7hA5f6A" title="Tandoor on Yelp!">Tandoor</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Indian
+				</div>
+			
+				<div class="restaurant right 52nd" id="r41" style="top: 435px">
+					<a name="anchor41"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/41" title="Note: This restaurant has been flagged. The LunchFilter team is currently reviewing suggested changes."><img alt="Icon_flagged" src="/images/icon_flagged.gif?1220401950" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/mFJYIVsGzhvu2K1Fd6VZ9g" title="A-Pizza Mart on Yelp!">A-Pizza Mart</a></h3>
+					
+
+					
+					
+						
+
+<a href="http://www.thesurvivalkit.com/apizzamart.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+<a href="http://www.yelp.com/biz/mFJYIVsGzhvu2K1Fd6VZ9g" title="Delivers!"><img alt="Delivers" src="/images/icon_delivers.gif?1220401936" /></a>
+
+
+					
+					<br />
+			
+					Italian, Pizza
+				</div>
+			
+				<div class="restaurant right 52nd" id="r43" style="top: 520px">
+					<a name="anchor43"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/43" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/bLRet5wIxuGym7AXtIHdHg" title="Mandarin Chef on Yelp!">Mandarin Chef</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Chinese
+				</div>
+			
+				<div class="restaurant right 52nd" id="r44" style="top: 560px">
+					<a name="anchor44"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/44" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/2gdDA6rNrBSVfccbpQytdQ" title="Inay's Manila Grill on Yelp!">Inay's Manila Grill</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Filipino
+				</div>
+			
+				<div class="restaurant right 52nd" id="r47" style="top: 690px">
+					<a name="anchor47"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/47" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/DCk27lbp82tOEPSNCvF4lQ" title="Pochi Tea Station on Yelp!">Pochi Tea Station</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Bubble Tea
+				</div>
+			
+				<div class="restaurant right 52nd" id="r46" style="top: 647px">
+					<a name="anchor46"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/46" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/cvDsVQAPUd3-9MgzskbN8g" title="Hawaii BBQ Restaurant on Yelp!">Hawaii BBQ Restaurant</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Barbecue, Hawaiian
+				</div>
+			
+				<div class="restaurant right 52nd" id="r49" style="top: 813px">
+					<a name="anchor49"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/49" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/n4A61MWiTz6ZpiUBVQLcjA" title="Pam's Kitchen on Yelp!">Pam's Kitchen</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Caribbean, Middle Eastern
+				</div>
+			
+				<div class="restaurant right 52nd" id="r48" style="top: 740px">
+					<a name="anchor48"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/48" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/kNKEjrUjM5BEEaQizH5Svw" title="Padi on Yelp!">Padi</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Indonesian
+				</div>
+			
+				<div class="restaurant right 52nd" id="r45" style="top: 605px">
+					<a name="anchor45"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/45" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/_rlU6AQD8jJJb7iCiHrRdg" title="Kiku Tempura House on Yelp!">Kiku Tempura House</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Japanese, Sushi
+				</div>
+			
+			
+		</div>		
+	
+		<div class="block" id="ave50th">
+			
+				<div class="restaurant left 50th" id="r50" style="top: 60px">
+					<a name="anchor50"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/-bAChktR6cdIjyxrxCVmSg" title="Jack in the Box on Yelp!">Jack in the Box</a></h3>
+					
+	<a href="/restaurant/flag/50" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					American, Burger Joint
+				</div>
+			
+				<div class="restaurant left 50th" id="r54" style="top: 550px">
+					<a name="anchor54"></a>
+					
+					
+						
+
+
+
+
+	<a href="/info/about" title="Recommended by Jordan"><img alt="Recommended by Jordan" src="/images/ribbonjordan.gif?1220401953" title="Recommended by jordan" /></a>
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/xpjyZ-hp_uosVmN81RMgMw" title="Da Vinci Subs on Yelp!">Da Vinci Subs</a></h3>
+					
+	<a href="/restaurant/flag/54" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Sandwiches
+				</div>
+			
+				<div class="restaurant left 50th" id="r55" style="top: 595px">
+					<a name="anchor55"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/ip8eIHu1LbSRctR5mFJAKQ" title="Shinka Tea on Yelp!">Shinka Tea</a></h3>
+					
+	<a href="/restaurant/flag/55" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Bubble Tea, Coffee Shop, Tea
+				</div>
+			
+				<div class="restaurant right 50th" id="r58" style="top: 350px">
+					<a name="anchor58"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/58" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3>Sunny's Korean Cafe</h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Coffee Shop, Korean
+				</div>
+			
+				<div class="restaurant right 50th" id="r56" style="top: 50px">
+					<a name="anchor56"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/56" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/lbGxgu8kwebOok4A9qK-qg" title="Subs Sandwiches on Yelp!">Subs Sandwiches</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Sandwiches
+				</div>
+			
+				<div class="restaurant right 50th" id="r57" style="top: 90px">
+					<a name="anchor57"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/57" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/DH4Gy9e9rPYpHl0fv8Zwzw" title="Fairuz on Yelp!">Fairuz</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Greek, Middle Eastern
+				</div>
+			
+				<div class="restaurant left 50th" id="r53" style="top: 480px">
+					<a name="anchor53"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/Lm-oxbCXTBn29ejD2i6q_Q" title="Fournos Greek Taverna on Yelp!">Fournos Greek Taverna</a></h3>
+					
+	<a href="/restaurant/flag/53" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Greek
+				</div>
+			
+				<div class="restaurant left 50th" id="r51" style="top: 280px">
+					<a name="anchor51"></a>
+					
+					
+						
+<a href="http://hfs.washington.edu/husky_card/" target="blank" title="Accepts Husky Cards!"><img alt="Accepts Husky Cards" src="/images/icon_huskycard.gif?1220401944" /></a>
+<a href="http://www.thesurvivalkit.com/smokindicksuw.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/xVsP0TfKWFjsqzfJDfg01A" title="Smokin' Dick's on Yelp!">Smokin' Dick's</a></h3>
+					
+	<a href="/restaurant/flag/51" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					American, Barbecue
+				</div>
+			
+				<div class="restaurant right 50th" id="r59" style="top: 880px">
+					<a name="anchor59"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/59" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/rL-Fh-JmTUr1x3w9hxZkng" title="Tully's on Yelp!">Tully's</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Coffee Shop, Tea
+				</div>
+			
+				<div class="restaurant left 50th" id="r52" style="top: 400px">
+					<a name="anchor52"></a>
+					
+					
+						
+
+<a href="http://www.thesurvivalkit.com/jewelofindia.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+<a href="http://www.yelp.com/biz/AsgtzyqpdjuPyjaEUVcUXA" title="Delivers!"><img alt="Delivers" src="/images/icon_delivers.gif?1220401936" /></a>
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/AsgtzyqpdjuPyjaEUVcUXA" title="Jewel of India on Yelp!">Jewel of India</a></h3>
+					
+	<a href="/restaurant/flag/52" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Indian
+				</div>
+			
+			
+				<p class="top"><a href="#" onclick="Filter.smoothScroll('logobox',0); return false;" title="Back to Top"><img alt="top" border="0" src="/images/top.gif?1220401950" /></a></p>
+			
+		</div>		
+	
+		<div class="block" id="ave47th">
+			
+				<div class="restaurant left 47th" id="r60" style="top: 55px">
+					<a name="anchor60"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/3TEdx5lOu6f1rVLVJSpxgw" title="Costas on Yelp!">Costas</a></h3>
+					
+	<a href="/restaurant/flag/60" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Greek
+				</div>
+			
+				<div class="restaurant left 47th" id="r72" style="top: 810px">
+					<a name="anchor72"></a>
+					
+					
+						
+<a href="http://hfs.washington.edu/husky_card/" target="blank" title="Accepts Husky Cards!"><img alt="Accepts Husky Cards" src="/images/icon_huskycard.gif?1220401944" /></a>
+<a href="http://www.thesurvivalkit.com/mix.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/We6t5BJ0csWzJoS39QAI_A" title="The Mix on Yelp!">The Mix</a></h3>
+					
+	<a href="/restaurant/flag/72" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Ice Cream
+				</div>
+			
+				<div class="restaurant left 47th" id="r70" style="top: 650px">
+					<a name="anchor70"></a>
+					
+					
+						
+<a href="http://hfs.washington.edu/husky_card/" target="blank" title="Accepts Husky Cards!"><img alt="Accepts Husky Cards" src="/images/icon_huskycard.gif?1220401944" /></a>
+<a href="http://www.thesurvivalkit.com/pitapituw.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/wuFhW1gVqMvaB-AKPQDrWw" title="Pita Pit on Yelp!">Pita Pit</a></h3>
+					
+	<a href="/restaurant/flag/70" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Greek
+				</div>
+			
+				<div class="restaurant left 47th" id="r66" style="top: 430px">
+					<a name="anchor66"></a>
+					
+					
+						
+
+<a href="http://www.thesurvivalkit.com/pagliacci.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/w5zZ8k4Z83q2UyYsCrlwCA" title="Pagliacci on Yelp!">Pagliacci</a></h3>
+					
+	<a href="/restaurant/flag/66" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Pizza
+				</div>
+			
+				<div class="restaurant left 47th" id="r65" style="top: 380px">
+					<a name="anchor65"></a>
+					
+					
+						
+
+
+
+
+	<a href="/info/about" title="Recommended by Jordan"><img alt="Recommended by Jordan" src="/images/ribbonjordan.gif?1220401953" title="Recommended by jordan" /></a>
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/q9Pvi8sO3FKQ_QpbRA_TiQ" title="Veggie Veggie on Yelp!">Veggie Veggie</a></h3>
+					
+	<a href="/restaurant/flag/65" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Thai, Vegetarian
+				</div>
+			
+				<div class="restaurant left 47th" id="r64" style="top: 340px">
+					<a name="anchor64"></a>
+					
+					
+						
+
+
+
+
+	<a href="/info/about" title="Recommended by Adam"><img alt="Recommended by Adam" src="/images/ribbonadam.gif?1220401950" title="Recommended by adam" /></a>
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/9YeSEzr8HZMCuQlAyr8FPw" title="Thai Tom on Yelp!">Thai Tom</a></h3>
+					
+	<a href="/restaurant/flag/64" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Thai
+				</div>
+			
+				<div class="restaurant left 47th" id="r62" style="top: 230px">
+					<a name="anchor62"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/798-eBr6EdOJktDT74fj2Q" title="Continental Restaurant &amp; Pastry Shop on Yelp!">Continental Restaurant & Pastry Shop</a></h3>
+					
+	<a href="/restaurant/flag/62" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Greek
+				</div>
+			
+				<div class="restaurant left 47th" id="r69" style="top: 580px">
+					<a name="anchor69"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/lJVN0LZkpKK4PkU3SvHd1Q" title="Ruzhen Mongolian Grill on Yelp!">Ruzhen Mongolian Grill</a></h3>
+					
+	<a href="/restaurant/flag/69" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Chinese
+				</div>
+			
+				<div class="restaurant right 47th" id="r1" style="top: 200px">
+					<a name="anchor1"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/1" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/zRozCiqiTImwdiaD4pOUDA" title="Tommy's Nightclub &amp; Grill on Yelp!">Tommy's Nightclub & Grill</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Pub Grub
+				</div>
+			
+				<div class="restaurant right 47th" id="r116" style="top: 430px">
+					<a name="anchor116"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/116" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/ZLbpGclbk8a-PSi1ocS-2A" title="Don Eduardos on Yelp!">Don Eduardos</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Mexican
+				</div>
+			
+				<div class="restaurant right 47th" id="r2" style="top: 540px">
+					<a name="anchor2"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/2" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/UTffYcFZqSymPxcbPrAPSg" title="Caffe Appassionato on Yelp!">Caffe Appassionato</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Coffee Shop
+				</div>
+			
+				<div class="restaurant right 47th" id="r74" style="top: 710px">
+					<a name="anchor74"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/74" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3>Oasis</h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Bubble Tea, Sandwiches
+				</div>
+			
+				<div class="restaurant left 47th" id="r71" style="top: 700px">
+					<a name="anchor71"></a>
+					
+					
+						
+<a href="http://hfs.washington.edu/husky_card/" target="blank" title="Accepts Husky Cards!"><img alt="Accepts Husky Cards" src="/images/icon_huskycard.gif?1220401944" /></a>
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/3BG1niOE6fJiIIk1-04sjg" title="Yunnie Bubble Tea on Yelp!">Yunnie Bubble Tea</a></h3>
+					
+	<a href="/restaurant/flag/71" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Bubble Tea
+				</div>
+			
+				<div class="restaurant left 47th" id="r73" style="top: 860px">
+					<a name="anchor73"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/eCjyvPJuS8-0Vzad8XuWcQ" title="Sure Shot on Yelp!">Sure Shot</a></h3>
+					
+	<a href="/restaurant/flag/73" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Coffee Shop
+				</div>
+			
+				<div class="restaurant left 47th" id="r68" style="top: 520px">
+					<a name="anchor68"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/KI2rgxOURuqU_i8Nc7DlTQ" title="University Korean on Yelp!">University Korean</a></h3>
+					
+	<a href="/restaurant/flag/68" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Korean
+				</div>
+			
+				<div class="restaurant left 47th" id="r63" style="top: 290px">
+					<a name="anchor63"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/PzN_ajAY0ymgsvzDcoUpVg" title="The Light Gourmet on Yelp!">The Light Gourmet</a></h3>
+					
+	<a href="/restaurant/flag/63" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Japanese, Sushi, Teriyaki
+				</div>
+			
+				<div class="restaurant left 47th" id="r61" style="top: 170px">
+					<a name="anchor61"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/RRKpYJObdwL4j_k0uKQ8RQ" title="Starbucks on Yelp!">Starbucks</a></h3>
+					
+	<a href="/restaurant/flag/61" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Coffee Shop, Sandwiches, Tea
+				</div>
+			
+				<div class="restaurant left 47th" id="r67" style="top: 480px">
+					<a name="anchor67"></a>
+					
+					
+						
+
+
+
+
+	<a href="/info/about" title="Recommended by Jordan"><img alt="Recommended by Jordan" src="/images/ribbonjordan.gif?1220401953" title="Recommended by jordan" /></a>
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/y-rxr2D4UEcWK0uRwKNLEg?hrid=V-BLfgXEE2a2Th-KSM-YTA" title="Lounjin on Yelp!">Lounjin</a></h3>
+					
+	<a href="/restaurant/flag/67" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Coffee Shop, Tea
+				</div>
+			
+				<div class="restaurant right 47th" id="r3" style="top: 650px">
+					<a name="anchor3"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/3" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/0c9GdZvlBR01tJclKA68aA" title="Kabobs Express on Yelp!">Kabobs Express</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Middle Eastern
+				</div>
+			
+			
+				<p class="top"><a href="#" onclick="Filter.smoothScroll('logobox',0); return false;" title="Back to Top"><img alt="top" border="0" src="/images/top.gif?1220401950" /></a></p>
+			
+		</div>		
+	
+		<div class="block" id="ave45th">
+			
+				<div class="restaurant right 45th" id="r82" style="top: 480px">
+					<a name="anchor82"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/82" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/DBb5klG44ftEqLiK0bobJA" title="University Bookstore on Yelp!">University Bookstore</a></h3>
+					
+
+					
+					
+						
+<a href="http://hfs.washington.edu/husky_card/" target="blank" title="Accepts Husky Cards!"><img alt="Accepts Husky Cards" src="/images/icon_huskycard.gif?1220401944" /></a>
+<a href="http://www.thesurvivalkit.com/ubooks.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					<br />
+			
+					Coffee Shop
+				</div>
+			
+				<div class="restaurant left 45th" id="r81" style="top: 690px">
+					<a name="anchor81"></a>
+					
+					
+						
+
+<a href="http://www.thesurvivalkit.com/haagendazs.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/OR7JLon2EQVV-ZqqgCAdkw" title="Haagen Dazs on Yelp!">Haagen Dazs</a></h3>
+					
+	<a href="/restaurant/flag/81" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Ice Cream
+				</div>
+			
+				<div class="restaurant left 45th" id="r79" style="top: 580px">
+					<a name="anchor79"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/WYt-PO5iJQFS1igvVkXXCw" title="Saiko on Yelp!">Saiko</a></h3>
+					
+	<a href="/restaurant/flag/79" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Bakery
+				</div>
+			
+				<div class="restaurant left 45th" id="r78" style="top: 230px">
+					<a name="anchor78"></a>
+					
+					
+						
+
+<a href="http://www.thesurvivalkit.com/paulsitaliankitchenuw.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/mtpoFcw4x8W0C9Qhs_PYfw" title="Earl's on the Ave on Yelp!">Earl's on the Ave</a></h3>
+					
+	<a href="/restaurant/flag/78" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Pub Grub
+				</div>
+			
+				<div class="restaurant left 45th" id="r76" style="top: 120px">
+					<a name="anchor76"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/-0l7GHrnQbmkpslVGtmHcw" title="Gingko Tea on Yelp!">Gingko Tea</a></h3>
+					
+	<a href="/restaurant/flag/76" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Bubble Tea, Coffee Shop
+				</div>
+			
+				<div class="restaurant left 45th" id="r77" style="top: 180px">
+					<a name="anchor77"></a>
+					
+					
+						
+
+
+
+
+	<a href="/info/about" title="Recommended by Adam"><img alt="Recommended by Adam" src="/images/ribbonadam.gif?1220401950" title="Recommended by adam" /></a>
+
+	<a href="/info/about" title="Recommended by Jordan"><img alt="Recommended by Jordan" src="/images/ribbonjordan.gif?1220401953" title="Recommended by jordan" /></a>
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/z7543gTRoewwvk72MwqvGg" title="Tokyo Gardens on Yelp!">Tokyo Gardens</a></h3>
+					
+	<a href="/restaurant/flag/77" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Japanese, Sushi, Teriyaki
+				</div>
+			
+				<div class="restaurant left 45th" id="r80" style="top: 640px">
+					<a name="anchor80"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/U1JuxM8LkrntNpiDntMtzw" title="Nasai on Yelp!">Nasai</a></h3>
+					
+	<a href="/restaurant/flag/80" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Japanese, Teriyaki
+				</div>
+			
+			
+				<p class="top"><a href="#" onclick="Filter.smoothScroll('logobox',0); return false;" title="Back to Top"><img alt="top" border="0" src="/images/top.gif?1220401950" /></a></p>
+			
+		</div>		
+	
+		<div class="block" id="ave43rd">
+			
+				<div class="restaurant left 43rd" id="r88" style="top: 300px">
+					<a name="anchor88"></a>
+					
+					
+						
+<a href="http://hfs.washington.edu/husky_card/" target="blank" title="Accepts Husky Cards!"><img alt="Accepts Husky Cards" src="/images/icon_huskycard.gif?1220401944" /></a>
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/ZARzNb8x2KT8qiNw3ZWE4Q" title="Chipotle on Yelp!">Chipotle</a></h3>
+					
+	<a href="/restaurant/flag/88" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Mexican
+				</div>
+			
+				<div class="restaurant right 43rd" id="r102" style="top: 650px">
+					<a name="anchor102"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/102" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/tsr?r=http%3A%2F%2Fwww.yelp.com%2Fbiz%2FoyJjYfS9P5EI_bRL10L1fA&position=1&type=composite&zip=98145&location=Seattle%2C%20WA%2098145&biz_id=oyJjYfS9P5EI_bRL10L1fA&description=bulldog%20news" title="Bulldog News on Yelp!">Bulldog News</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Coffee Shop
+				</div>
+			
+				<div class="restaurant right 43rd" id="r101" style="top: 600px">
+					<a name="anchor101"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/101" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/RvgLI-vSsr-l7buDh1vZgw" title="Shalimar on Yelp!">Shalimar</a></h3>
+					
+
+					
+					
+						
+
+<a href="http://www.thesurvivalkit.com/shalimar.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					<br />
+			
+					Indian
+				</div>
+			
+				<div class="restaurant right 43rd" id="r99" style="top: 490px">
+					<a name="anchor99"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/99" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/WXajgebU9cnxHFFmIiZvew" title="Appethai on Yelp!">Appethai</a></h3>
+					
+
+					
+					
+						
+
+<a href="http://www.thesurvivalkit.com/appethaiuw.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					<br />
+			
+					Thai
+				</div>
+			
+				<div class="restaurant right 43rd" id="r96" style="top: 350px">
+					<a name="anchor96"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/96" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/J-ZPcFUV3FI1LA6KoMnFzA" title="Thaiger Room on Yelp!">Thaiger Room</a></h3>
+					
+
+					
+					
+						
+
+
+<a href="http://www.yelp.com/biz/J-ZPcFUV3FI1LA6KoMnFzA" title="Delivers!"><img alt="Delivers" src="/images/icon_delivers.gif?1220401936" /></a>
+
+
+					
+					<br />
+			
+					Thai
+				</div>
+			
+				<div class="restaurant right 43rd" id="r94" style="top: 260px">
+					<a name="anchor94"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/94" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/NuvWsd7os1l6Pp4Map1xPw" title="A Burger Place on Yelp!">A Burger Place</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+	<a href="/info/about" title="Recommended by Adam"><img alt="Recommended by Adam" src="/images/ribbonadam.gif?1220401950" title="Recommended by adam" /></a>
+
+	<a href="/info/about" title="Recommended by Jordan"><img alt="Recommended by Jordan" src="/images/ribbonjordan.gif?1220401953" title="Recommended by jordan" /></a>
+
+
+					
+					<br />
+			
+					American, Burger Joint
+				</div>
+			
+				<div class="restaurant left 43rd" id="r85" style="top: 150px">
+					<a name="anchor85"></a>
+					
+					
+						
+
+
+
+
+	<a href="/info/about" title="Recommended by Jordan"><img alt="Recommended by Jordan" src="/images/ribbonjordan.gif?1220401953" title="Recommended by jordan" /></a>
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/UBYFFyRtAV9_-akBPjdoSw" title="Ruby's on Yelp!">Ruby's</a></h3>
+					
+	<a href="/restaurant/flag/85" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					American, Diner, Sandwiches
+				</div>
+			
+				<div class="restaurant left 43rd" id="r83" style="top: 60px">
+					<a name="anchor83"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/lwL27h7CpiHfWkyQlSiJnw" title="Flowers on Yelp!">Flowers</a></h3>
+					
+	<a href="/restaurant/flag/83" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Sandwiches, Vegetarian
+				</div>
+			
+				<div class="restaurant left 43rd" id="r86" style="top: 190px">
+					<a name="anchor86"></a>
+					
+					
+						
+
+<a href="http://www.thesurvivalkit.com/china1st.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/s_TqvH0o3AQCOgTdp2rSmQ" title="China First on Yelp!">China First</a></h3>
+					
+	<a href="/restaurant/flag/86" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Chinese, Vegetarian
+				</div>
+			
+				<div class="restaurant right 43rd" id="r95" style="top: 300px">
+					<a name="anchor95"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/95" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/hpoUWb4V9t58CxfdNMYigg" title="New China Express on Yelp!">New China Express</a></h3>
+					
+
+					
+					
+						
+
+
+<a href="http://www.yelp.com/biz/hpoUWb4V9t58CxfdNMYigg" title="Delivers!"><img alt="Delivers" src="/images/icon_delivers.gif?1220401936" /></a>
+
+
+					
+					<br />
+			
+					Chinese
+				</div>
+			
+				<div class="restaurant left 43rd" id="r90" style="top: 500px">
+					<a name="anchor90"></a>
+					
+					
+						
+
+<a href="http://www.thesurvivalkit.com/subwayuw.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					
+					
+					<h3>Subway</h3>
+					
+	<a href="/restaurant/flag/90" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Sandwiches
+				</div>
+			
+				<div class="restaurant right 43rd" id="r100" style="top: 560px">
+					<a name="anchor100"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/100" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/gIA1JWri0CQlN3QO4jtzaA" title="Thai 65 on Yelp!">Thai 65</a></h3>
+					
+
+					
+					
+						
+
+<a href="http://www.thesurvivalkit.com/appethaiuw.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+	<a href="/info/about" title="Recommended by Jordan"><img alt="Recommended by Jordan" src="/images/ribbonjordan.gif?1220401953" title="Recommended by jordan" /></a>
+
+
+					
+					<br />
+			
+					Thai
+				</div>
+			
+				<div class="restaurant left 43rd" id="r93" style="top: 700px">
+					<a name="anchor93"></a>
+					
+					
+						
+<a href="http://hfs.washington.edu/husky_card/" target="blank" title="Accepts Husky Cards!"><img alt="Accepts Husky Cards" src="/images/icon_huskycard.gif?1220401944" /></a>
+<a href="http://www.thesurvivalkit.com/cafeontheaveuw.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/e5fWoLchFxXDpudnqSa9lQ" title="Cafe on the Ave on Yelp!">Cafe on the Ave</a></h3>
+					
+	<a href="/restaurant/flag/93" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					American, Coffee Shop
+				</div>
+			
+				<div class="restaurant left 43rd" id="r89" style="top: 430px">
+					<a name="anchor89"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/zSp9rLzeGCrvrGNUejN1dQ" title="Finn McCool's on Yelp!">Finn McCool's</a></h3>
+					
+	<a href="/restaurant/flag/89" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Pub Grub
+				</div>
+			
+				<div class="restaurant left 43rd" id="r4" style="top: 590px">
+					<a name="anchor4"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/e8Qygq-7q6hnoZpmAGCuww" title="Northwest Fish &amp; Chips on Yelp!">Northwest Fish & Chips</a></h3>
+					
+	<a href="/restaurant/flag/4" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Seafood
+				</div>
+			
+				<div class="restaurant right 43rd" id="r98" style="top: 450px">
+					<a name="anchor98"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/98" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/MMHPceVb926Y60Tzd1aTOg" title="Pizza Brava on Yelp!">Pizza Brava</a></h3>
+					
+
+					
+					
+						
+<a href="http://hfs.washington.edu/husky_card/" target="blank" title="Accepts Husky Cards!"><img alt="Accepts Husky Cards" src="/images/icon_huskycard.gif?1220401944" /></a>
+<a href="http://www.thesurvivalkit.com/pizzabravauw.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					<br />
+			
+					Greek, Italian, Pizza
+				</div>
+			
+				<div class="restaurant left 43rd" id="r84" style="top: 100px">
+					<a name="anchor84"></a>
+					
+					
+						
+
+<a href="http://www.thesurvivalkit.com/bestofbento.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/fC7LjIYyl_k6-H7_AEhQVw" title="Best of Bento on Yelp!">Best of Bento</a></h3>
+					
+	<a href="/restaurant/flag/84" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Japanese, Sushi, Teriyaki
+				</div>
+			
+				<div class="restaurant left 43rd" id="r87" style="top: 240px">
+					<a name="anchor87"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3>Pho Vietnam 2</h3>
+					
+	<a href="/restaurant/flag/87" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Pho, Vietnamese
+				</div>
+			
+				<div class="restaurant left 43rd" id="r91" style="top: 550px">
+					<a name="anchor91"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/AUz4akyLb32J7SDa_nKgMQ" title="Pho Tran on Yelp!">Pho Tran</a></h3>
+					
+	<a href="/restaurant/flag/91" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Pho, Vietnamese
+				</div>
+			
+				<div class="restaurant right 43rd" id="r97" style="top: 415px">
+					<a name="anchor97"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/97" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/EOoj2h1Brzk1AhqScvIHDA" title="Thanh Vi on Yelp!">Thanh Vi</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					Pho, Vietnamese
+				</div>
+			
+				<div class="restaurant left 43rd" id="r92" style="top: 640px">
+					<a name="anchor92"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/4HBKsjdGHutH3TflSa4QhA" title="Pho Than Brothers on Yelp!">Pho Than Brothers</a></h3>
+					
+	<a href="/restaurant/flag/92" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Pho, Vietnamese
+				</div>
+			
+			
+				<p class="top"><a href="#" onclick="Filter.smoothScroll('logobox',0); return false;" title="Back to Top"><img alt="top" border="0" src="/images/top.gif?1220401950" /></a></p>
+			
+		</div>		
+	
+		<div class="block" id="ave42nd">
+			
+				<div class="restaurant right 42nd" id="r112" style="top: 418px">
+					<a name="anchor112"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/112" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/eAtgP6XcUjRVK8dh8foZdQ" title="Ichiro on Yelp!">Ichiro</a></h3>
+					
+
+					
+					
+						
+<a href="http://hfs.washington.edu/husky_card/" target="blank" title="Accepts Husky Cards!"><img alt="Accepts Husky Cards" src="/images/icon_huskycard.gif?1220401944" /></a>
+
+
+
+
+					
+					<br />
+			
+					Korean, Sushi, Teriyaki
+				</div>
+			
+				<div class="restaurant right 42nd" id="r113" style="top: 478px">
+					<a name="anchor113"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/113" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/AXQhTGR3PLFk1TW72CbqvA" title="Solstice on Yelp!">Solstice</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+	<a href="/info/about" title="Recommended by Jordan"><img alt="Recommended by Jordan" src="/images/ribbonjordan.gif?1220401953" title="Recommended by jordan" /></a>
+
+
+					
+					<br />
+			
+					Coffee Shop, Tea
+				</div>
+			
+				<div class="restaurant right 42nd" id="r114" style="top: 523px">
+					<a name="anchor114"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/114" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/dM7aCIJT_cWH3BNgMi9dNw" title="Schultzy's on Yelp!">Schultzy's</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+	<a href="/info/about" title="Recommended by Adam"><img alt="Recommended by Adam" src="/images/ribbonadam.gif?1220401950" title="Recommended by adam" /></a>
+
+
+					
+					<br />
+			
+					American, Burger Joint
+				</div>
+			
+				<div class="restaurant left 42nd" id="r107" style="top: 230px">
+					<a name="anchor107"></a>
+					
+					
+						
+
+
+
+
+	<a href="/info/about" title="Recommended by Jordan"><img alt="Recommended by Jordan" src="/images/ribbonjordan.gif?1220401953" title="Recommended by jordan" /></a>
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/WxUTo2tUjcN5AxA6UzRFfw" title="Big Time Brewery on Yelp!">Big Time Brewery</a></h3>
+					
+	<a href="/restaurant/flag/107" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Pizza, Pub Grub, Sandwiches
+				</div>
+			
+				<div class="restaurant left 42nd" id="r104" style="top: 110px">
+					<a name="anchor104"></a>
+					
+					
+						
+
+
+<a href="http://www.yelp.com/biz/Ea-ZuT5DKD188BpRMTDyGA" title="Delivers!"><img alt="Delivers" src="/images/icon_delivers.gif?1220401936" /></a>
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/Ea-ZuT5DKD188BpRMTDyGA" title="Jimmy John's on Yelp!">Jimmy John's</a></h3>
+					
+	<a href="/restaurant/flag/104" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Sandwiches
+				</div>
+			
+				<div class="restaurant right 42nd" id="r111" style="top: 135px">
+					<a name="anchor111"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/111" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/XQcSFSkoD7N_VcFGbMmobw" title="Burger Hut on Yelp!">Burger Hut</a></h3>
+					
+
+					
+					
+						
+
+
+
+
+
+					
+					<br />
+			
+					American, Burger Joint
+				</div>
+			
+				<div class="restaurant right 42nd" id="r110" style="top: 60px">
+					<a name="anchor110"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/110" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/p8bPLWRaqSk8CxztdHEe1g" title="Gran Sabor on Yelp!">Gran Sabor</a></h3>
+					
+
+					
+					
+						
+
+<a href="http://www.thesurvivalkit.com/gransaboruw.htm" target="blank" title="Has an online coupon!"><img alt="Has Coupon" border="0" src="/images/icon_coupon.gif?1220401947" /></a>
+
+
+
+					
+					<br />
+			
+					Mexican
+				</div>
+			
+				<div class="restaurant left 42nd" id="r106" style="top: 195px">
+					<a name="anchor106"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/vkhdQ_wYdtG1gC3s5ckpmw" title="Spicy Wok on Yelp!">Spicy Wok</a></h3>
+					
+	<a href="/restaurant/flag/106" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Chinese, Thai
+				</div>
+			
+				<div class="restaurant left 42nd" id="r105" style="top: 150px">
+					<a name="anchor105"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/Y2--1IoNBmYUrfwNOIjTdw" title="Aladdin on Yelp!">Aladdin</a></h3>
+					
+	<a href="/restaurant/flag/105" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Middle Eastern
+				</div>
+			
+				<div class="restaurant left 42nd" id="r108" style="top: 270px">
+					<a name="anchor108"></a>
+					
+					
+						
+<a href="http://hfs.washington.edu/husky_card/" target="blank" title="Accepts Husky Cards!"><img alt="Accepts Husky Cards" src="/images/icon_huskycard.gif?1220401944" /></a>
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/NtNAjOsre1y4rPsZ9UJ0yA" title="Yummy Bites on Yelp!">Yummy Bites</a></h3>
+					
+	<a href="/restaurant/flag/108" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					American, Burger Joint, Japanese, Korean, Sandwiches, Sushi, Teriyaki
+				</div>
+			
+				<div class="restaurant right 42nd" id="r115" style="top: 578px">
+					<a name="anchor115"></a>
+					
+					
+					
+					
+	<a href="/restaurant/flag/115" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+					<h3><a href="http://www.yelp.com/biz/KX4oiVIK0IFiW0Lb50U9xA" title="University Teriyaki on Yelp!">University Teriyaki</a></h3>
+					
+
+					
+					
+						
+<a href="http://hfs.washington.edu/husky_card/" target="blank" title="Accepts Husky Cards!"><img alt="Accepts Husky Cards" src="/images/icon_huskycard.gif?1220401944" /></a>
+
+
+
+
+					
+					<br />
+			
+					Korean, Sushi, Teriyaki
+				</div>
+			
+				<div class="restaurant left 42nd" id="r109" style="top: 340px">
+					<a name="anchor109"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/LeP4UZpXfeb83gMmRHUWBQ" title="Pho Thy Thy on Yelp!">Pho Thy Thy</a></h3>
+					
+	<a href="/restaurant/flag/109" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Bubble Tea, Pho, Vietnamese
+				</div>
+			
+				<div class="restaurant left 42nd" id="r103" style="top: 60px">
+					<a name="anchor103"></a>
+					
+					
+						
+
+
+
+
+
+					
+					
+					
+					<h3><a href="http://www.yelp.com/biz/dWV41BVCxC30m6HTgRqQZQ" title="Starbucks on Yelp!">Starbucks</a></h3>
+					
+	<a href="/restaurant/flag/103" title="Flag/update restaurant info"><img alt="Icon_flag" src="/images/icon_flag.gif?1220401948" /></a>
+
+
+					
+					
+					<br />
+			
+					Coffee Shop, Sandwiches, Tea
+				</div>
+			
+			
+				<p class="top"><a href="#" onclick="Filter.smoothScroll('logobox',0); return false;" title="Back to Top"><img alt="top" border="0" src="/images/top.gif?1220401950" /></a></p>
+			
+		</div>		
+	
+
+  
+</div>
+
+
+
+		</div>
+
+		<!-- START FOOTER -->
+		<div id="footer">
+			<small>Copyright &copy; 2007 - LunchFilter.com | <a href="/info/about">About</a></small>
+		</div>
+		<!-- END FOOTER --> 
+		<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			_uacct = "UA-887439-3";
+			urchinTracker();
+		</script>
+		
+        
+	</body>
+</html>

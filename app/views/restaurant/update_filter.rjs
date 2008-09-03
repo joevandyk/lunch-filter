@@ -1,0 +1,31 @@
+#Clean all old filters
+page['log'].show
+page.select(".restaurant").each do |element|
+  page.filter.clean(element)
+end
+
+if params[:cuisine_ids]
+  #Highlight all restaurants with given cuisines
+  for restaurant in @restaurants
+    page.filter.highlight("r#{restaurant.id}")
+  end
+  
+if @restaurants.empty?
+  page.replace_html("log", "No restaurants found, try selecting other cuisine types.")
+else
+
+  page.replace_html("log", "<h3>#{pluralize(@restaurants.uniq.length, "restaurant")} found!</h3>
+    <ul id='found'></ul>")
+    
+
+  for restaurant in @restaurants.sort_by { |restaurant| restaurant[:name] }.uniq
+      page.insert_html :bottom, "found", "<li>#{link_to_function(restaurant.name, "Filter.smoothScroll('r#{restaurant.id}', -(Client.viewportHeight()/2) + 30);Filter.highlightClicked('r#{restaurant.id}')")}</li>"
+  end
+  
+  page.insert_html :bottom, "log", "<div class='clearBoth'>Didn't find what you were looking for? Find #{link_to 'restaurants', @street.neighborhood_url} near #{@street.name}!</div>"
+end  
+  
+else
+  page['log'].hide
+  #replace_html("log", "<h3>Please choose at least one cuisine type.</h3>")
+end

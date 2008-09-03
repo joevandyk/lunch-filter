@@ -1,0 +1,61 @@
+<% unless restaurants.empty? %>
+	<% for block in @blocks %>
+		<div class="block" id="ave<%=block.name%>">
+			<% for restaurant in block.restaurants %>
+				<div class="restaurant <%= restaurant.side %> <%= restaurant.block.name %>" id="r<%= restaurant.id %>" style="top: <%=restaurant.top%>px">
+					<a name="anchor<%=restaurant.id%>"></a>
+					
+					<% if restaurant.side == "left" %>
+						<%= render :partial => "icons", :locals=>{:restaurant=>restaurant} %>
+					<% end %>
+					
+					<%= render :partial => "flags", :locals=>{:restaurant=>restaurant} if restaurant.side == "right" %>
+					<h3><%# restaurant.name %><%= restaurant.yelp_url.empty? ? restaurant.name : link_to(restaurant.name, restaurant.yelp_url, :title=>"#{restaurant.name} on Yelp!") %></h3>
+					<%= render :partial => "flags", :locals=>{:restaurant=>restaurant} if restaurant.side == "left" %>
+
+					<% #moderator controls
+					if logged_in? %>
+						<%=link_to(image_tag("wrench.png"), 
+								{:controller=>"restaurant", 
+								:action=>"edit_restaurant", 
+								:id=>restaurant.id}, :title=>"Edit Restaurant Info")%> 
+						 <%=link_to image_tag("delete.png"), 
+								{:action=>"destroy_restaurant",
+								:id=>restaurant.id}, :title=>"Delete Restaurant", :confirm => "Are you sure? There is no undo." %> 
+						<% unless restaurant.user_recommended?(current_user.id) %>
+							<%=link_to image_tag("recommend.png"), 
+									{:controller=>"restaurant", 
+									:action=>"recommendation", 
+									:id=>restaurant.id,
+									:recommendation => true}, :title=>"Recommend Restaurant" %>
+						<% else %>
+							<%=link_to image_tag("unrecommend.png"), 
+									{:controller=>"restaurant", 
+									:action=>"recommendation", 
+									:id=>restaurant.id,
+									:recommendation => false},
+									:title=>"Unrecommend Restaurant" %>
+						<% end %>
+					<% end %>
+					<% if restaurant.side == "right" %>
+						<%= render :partial => "icons", :locals=>{:restaurant=>restaurant} %>
+					<% end %>
+					<br />
+			
+					<%= #format cuisines into comma separted list and chomp the last comma
+					cuisines = "" 
+					for cuisine in restaurant.cuisines
+						cuisines << cuisine.name + ", "
+					end 
+					cuisines.to_s.chomp(", ")
+					%>
+				</div>
+			<% end %>
+			<% unless block.id == @blocks.first.id %>
+				<p class="top"><%= link_to_function(image_tag("top.gif", :alt=>"top", :border=>"0"),"Filter.smoothScroll('logobox',0)", :title=>"Back to Top") %></p>
+			<% end %>
+		</div>		
+	<% end %>
+<% else %>
+	<p>No restaurants have been created for on this street</p>
+<% end %>

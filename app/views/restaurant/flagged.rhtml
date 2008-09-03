@@ -1,0 +1,58 @@
+<fieldset class="alignLeft">
+	<legend>Flagged Restaurants</legend>
+
+	<% if @flags.empty? %>
+		<p>Nobody has flagged any restaurants yet :( </p>
+	<% else %>
+	<!-- start headers-->
+		<div class="width50 floatLeft">
+			<h3>Current</h3>
+		</div>
+		<div class="width50 floatLeft">
+			<h3>Suggested</h3>
+		</div>
+		<!-- end headers -->
+	<% end %>
+	<% for flag in @flags %>
+		<div class="width50 floatLeft">
+			<a name="anchor<%=flag.restaurant.id%>"></a>
+			<p><b><%= flag.restaurant.name %></b></p>
+			<p><%= render :partial => "icons", :locals=>{:restaurant=>flag.restaurant} %></p>
+			
+			Cuisines: <%= cuisines = "" 
+			for cuisine in flag.restaurant.cuisines
+				cuisines << cuisine.name + ", "
+			end 
+			cuisines.to_s.chomp(", ") %>
+			
+			<p>Yelp URL: <%= link_to flag.restaurant.yelp_url %></p>
+			<p>Coupon URL: <%= link_to flag.restaurant.coupon_url %></p>
+			<p>Delivery?: <%= (flag.restaurant.delivery) ? "Yes" : "No" %></p>
+			<p>Accepts Husky Card?: <%= (flag.restaurant.husky_card) ? "Yes" : "No" %></p>
+		</div>
+		
+		<div class="width50 floatLeft" id="restaurant#{flag.id}">
+			<a name="anchor<%=flag.id%>"></a>
+			<p><b><%= flag.name %></b></p>
+			<p><%= render :partial => "icons", :locals=>{:restaurant=>flag} %></p>
+			Cuisines: <%= cuisines = "" 
+			for cuisine in flag.cuisines
+				cuisines << cuisine.name + ", "
+			end 
+			cuisines.sort.to_s.chomp(", ") %>
+			
+			<p>Yelp URL: <%= link_to flag.yelp_url %></p>
+			<p>Coupon URL: <%= link_to flag.coupon_url %></p>
+			<p>Delivery?: <%= (flag.delivery) ? "Yes" : "No" %></p>
+			<p>Accepts Husky Card?: <%= (flag.husky_card) ? "Yes" : "No" %></p>
+			<p><%= "note: #{flag.note}" if flag.note != "" %></p>
+		</div>
+		
+		
+		<%= button_to "Accept Changes", {:action => "accept_flag", :id => flag.id },
+	            :confirm => "Are you sure you want to accept these changes?  This will override the current data for this restaurant.", :method => :post %>
+		<%= button_to "Discard Suggestion", {:action => "destroy_flag", :id => flag.id },
+	            :confirm => "Are you sure you want to delete this suggestion?", :method => :delete %>
+		<hr>
+	<% end %>
+</fieldset>

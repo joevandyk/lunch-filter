@@ -1,0 +1,20 @@
+/* ###################### */
+/* CSS Specific to UW Ave */
+/* ###################### */
+
+#aveContainer
+{
+width:1000px;
+height:5111px;
+margin:0em auto;
+background:url("../images/theave.png") center top no-repeat;
+text-align:left;
+}
+
+/* These are the blocks of the Ave */
+#ave52nd {height:870px;}
+#ave50th {height:939px;}
+#ave47th {height:940px;}
+#ave45th {height:765px;}
+#ave43rd {height:769px;}
+#ave42nd {height:828px;}

@@ -1,0 +1,8 @@
+<fieldset class="alignLeft">
+	<legend>Editing a Street </legend>
+	<%= start_form_tag :action=>"edit_street" %>
+		<%= render :partial => "street_form" %>
+		<%= submit_tag "Edit Street" %>
+	<%= end_form_tag %>
+	<p><%=link_to "back", :controller=>"moderator" %></p>
+</fieldset>

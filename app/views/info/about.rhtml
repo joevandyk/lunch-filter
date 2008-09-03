@@ -1,0 +1,74 @@
+<div id="menu" class="clearfix">
+	<div id="menu-inside">		
+		<div id="logobox">
+			<h1><%=link_to("#{image_tag('LF_logo.gif', :border=>"0")}#{image_tag('lunchfilter.gif', :border=>"0")}", :controller=>"restaurant")%></h1>
+	    </div>
+		<div id="breadcrumbs">
+			<p><%=link_to "LunchFilter", :controller=>"restaurant" %> &raquo; <b>About LunchFilter</b></p>
+		</div>
+
+	</div><!--end menu inside-->
+</div><!-- end menu -->
+
+
+<fieldset class="alignLeft">
+	<legend>About LunchFilter</legend>
+
+	<p>LunchFilter was created by <%=link_to "Jordan Isip", "http://www.jordanisip.com" %> 
+		and <%= link_to "Adam Hindman", "http://www.adamhindman.com" %>.
+		We live and work near <%= link_to "The Ave", "/cities/Seattle/theave"%>, and when lunch came around we were having trouble
+		deciding which of the dozens of perfectly good restaurants we should go to. Too
+		many choices.</p>
+	<p>So, we made a very simple tool to solve this problem. Here's how it works: If
+		you live in one of the neighborhoods we've mapped, just select the kinds of foods
+		you're hungry for, and LunchFilter will show you some restaurants that you might
+		like. It'll also tell you something about the restaurants&mdash;whether they deliver,
+		whether they've got a coupon, that sort of thing.  For now we've left restaurant ratings and reviews
+		up to those crazy <%= link_to "yelpers", "http://www.yelp.com" %>.  But if there is enough demand for ratings and reviews to be on
+		LunchFilter, we can add it.</p>
+		
+	<p>LunchFilter is small, fast, and easy to use. It's personalized for your neighborhood,
+		so it's accurate and up-to-date. It's fun, and, if properly used, it can keep
+		you from starving to death.</p>
+		
+	<p>Want to learn more? ask a question? or maybe give us a compliment? Just send us an email:</p>
+	<ul>
+		<li><a href="mailto:jordan@lunchfilter.com">jordan@lunchfilter.com</a></li>
+		<li><a href="mailto:adam@lunchfilter.com">adam@lunchfilter.com</a></li>
+	</ul>
+		
+	<!--
+	<h1>Brought to you by</h1>
+	<h2>Jordan Isip</h2>
+	<h3>My recommendations</h3>
+	<p><%#image_tag "ribbonjordan-big.gif", :class=>"floatLeft" %>
+	<h4>Tokyo Gardens</h4>
+	There's a lot of places to get Teriyaki on the Ave (7 to be exact), but Tokyo
+	Gardens is my favorite. They give you an enormous plate of delicious food for about
+	$7. Seating is horrible. I usually get the Chicken Katsu.
+	</p>
+	<p><%# image_tag "ribbonjordan-big.gif", :class=>"floatLeft" %>
+	<h4>Tokyo Gardens</h4>
+	There's a lot of places to get Teriyaki on the Ave (7 to be exact), but Tokyo
+	Gardens is my favorite. They give you an enormous plate of delicious food for about
+	$7. Seating is horrible. I usually get the Chicken Katsu.
+	</p>
+	
+	<h2>Adam Hindman</h2>
+	<p>I did the graphics (in Adobe Illustrator), the map, and the html/css.</p>
+	<h3>My recommendations</h3>
+	<p><%# image_tag "ribbonadam-big.gif", :class=>"floatLeft" %>
+	<h4>Tokyo Gardens</h4>
+	There's a lot of places to get Teriyaki on the Ave (7 to be exact), but Tokyo
+	Gardens is my favorite. They give you an enormous plate of delicious food for about
+	$7. Seating is horrible. I usually get the Chicken Katsu.
+	</p>
+	<br />
+	<p><%# image_tag "ribbonadam-big.gif", :class=>"floatLeft" %>
+	<h4>Tokyo Gardens</h4>
+	There's a lot of places to get Teriyaki on the Ave (7 to be exact), but Tokyo
+	Gardens is my favorite. They give you an enormous plate of delicious food for about
+	$7. Seating is horrible. I usually get the Chicken Katsu.
+	</p>
+-->
+</fieldset>

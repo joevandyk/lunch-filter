@@ -1,0 +1,11 @@
+page['hungry'].show
+#page.filter.removeHighlights
+if @random_restaurant
+  page.filter.highlight("r#{@random_restaurant.id}")
+  #page.replace_html("hungry", "Fair enough, how about some #{link_to_function(@random_restaurant.name, "Filter.smoothScroll('r#{@random_restaurant.id}', -20)")}?")
+
+  page.replace_html("hungry", "<h3>Fair enough, how does <span id='random'>#{link_to_function(@random_restaurant.name, "Filter.smoothScroll('r#{@random_restaurant.id}', -(Client.viewportHeight()/2) + 30);Filter.highlightClicked('r#{@random_restaurant.id}')")}</span> sound? [ #{link_to_function "x", "$('hungry').hide();"} ]</h3>")
+ 
+else
+  page.alert("oops. something restaurant could not be found!")
+end

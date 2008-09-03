@@ -1,0 +1,64 @@
+
+<%= stylesheet_link_tag @street.url_name %>
+
+<div id="menu" class="clearfix">
+	<div id="menu-inside">		
+		<div id="logobox">
+			<h1><%=link_to("#{image_tag('LF_logo.gif', :border=>"0")}#{image_tag('lunchfilter.gif', :border=>"0")}", :controller=>"restaurant")%></h1>
+	    </div>
+		<div id="breadcrumbs">
+		<p><%=link_to "LunchFilter", :controller=>"restaurant" %> &raquo; <%= link_to @street.city.name, :controller=>"restaurant", :action=>"streets", :city=>@street.city.name %> &raquo; <b><%= @street.name %></b></p>
+			<!--
+			<p id="top">Where you at? <%# select_tag "streets", options_from_collection_for_select(@streets, "url_name", "name", @street.url_name),  
+					:onchange=>"location.href=this.value"%></p>-->
+
+			<p><small><%= @street.description %></small></p>
+		</div>
+		<div id="filters">
+			<h2><span class="menu-header">What do you feel like eating?</span></h2>
+			<!--<form id="filter_form" class="selector">-->
+			<%= form_remote_tag :url => {:controller=>"restaurant", :action =>"find_random_restaurant", :street => @street.id}, 
+										:loading => 'Filter.loading()',
+										:complete => 'Filter.complete()',
+										:html => { :id => 'filter_form' , :class => "selector"} %>
+				<% for cuisine in @cuisines %>
+					<label><input type="checkbox" 
+						id="<%=cuisine.id%>"
+						name="cuisine_ids[]"
+						value="<%=cuisine.id%>"
+						<% if @filter_cuisines.include? cuisine %> checked="checked"<% end %>
+					/><%=cuisine.name %></label>
+				<% end %>
+				<p>
+					<small><a href="javascript:Filter.uncheckAll();">Uncheck All</a></small>
+					<small><a href="javascript:Filter.checkAll();">Check All</a></small>
+				</p>
+				
+				<div class="clearBoth"></div>
+				
+				<!-- divs manipulated by js -->
+				<div id="loading" style="display:none;"><%=image_tag "indicator.gif" %> Loading...</div>
+				<div id="log"><!-- exceptions are loaded here --></div>
+				
+				<p><input type="submit" value="I'm too hungry, pick for me!" /></p>
+				<div id="hungry"><!--suggestion loaded here--></div>
+				<!-- end manipulated divs -->
+
+				<%= observe_form "filter_form", :url => {:controller=>"restaurant", :action =>"update_filter", :street => @street.id},
+									:loading => 'Filter.loading()',
+									:complete => 'Filter.complete()',
+									:update => {} %>
+			</form>
+			
+		</div>
+		<p><%=link_to "Add a New Restaurant", :controller=>"restaurant", :action=>"create_restaurant", :id=>@street.id if logged_in? %></p>
+	</div><!--end menu inside-->
+</div><!-- end menu -->
+
+<div id="aveContainer"><!-- change id to just container to abstract to multiple streets-->
+  
+	  <%= render :partial => "restaurants", :local => @restaurants %>
+  
+</div>
+
+

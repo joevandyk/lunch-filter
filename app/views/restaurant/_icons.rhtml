@@ -1,0 +1,7 @@
+
+<%= link_to(image_tag("icon_huskycard.gif", :alt=>'Accepts Husky Cards'), "http://hfs.washington.edu/husky_card/", :target=>"blank", :title=>"Accepts Husky Cards!") if restaurant.husky_card == 1 %>
+<%= link_to(image_tag("icon_coupon.gif", :alt=>'Has Coupon',:border=>"0"), restaurant.coupon_url, :target=>"blank", :title=>"Has an online coupon!") unless restaurant.coupon_url.empty? %>
+<%= link_to(image_tag("icon_delivers.gif", :alt=>'Delivers'), restaurant.yelp_url, :title=>"Delivers!") if restaurant.delivery == 1 %>
+<% for user in restaurant.recommendation_users %>
+	<%= link_to(image_tag("ribbon#{user.login}.gif", :alt=>"Recommended by #{user.login.capitalize}", :title=>"Recommended by #{user.login}"), {:controller=>"info", :action=>"about"}, :title=>"Recommended by #{user.login.capitalize}") %>
+<% end %>

@@ -1,0 +1,19 @@
+<div id="menu" class="clearfix">
+	<div id="menu-inside">		
+		<div id="logobox">
+			<h1><%=link_to("#{image_tag('LF_logo.gif', :border=>"0")}#{image_tag('lunchfilter.gif', :border=>"0")}", :controller=>"restaurant")%></h1>
+	    </div>
+		<div id="breadcrumbs">
+			<p><%=link_to "LunchFilter", :controller=>"restaurant" %> &raquo; <%= link_to @street.city.name, :controller=>"restaurant", :action=>"streets", :city=>@street.city.name %> &raquo; <%= link_to @street.name, :controller=>"restaurant", :action=>"list", :id=>@street.city.name, :id=>@street.url_name %> &raquo; <b>Update Restaurant Details</b></p>
+		</div>
+	</div><!--end menu inside-->
+</div><!-- end menu -->
+<fieldset class="alignLeft">
+	<legend>Update Restaurant Details</legend>
+	<small>Changes will be approved by the LunchFilter team within a couple of days.</small>
+	<div id="flag_restaurant_form">
+		<%= start_form_tag :action=>"flag" %>
+			<%=render :partial => "form"%>
+		<%= end_form_tag %>
+	</div>
+</fieldset>

@@ -1,0 +1,50 @@
+<div id="home-top">
+	<img src="images/home-lunchfilter.gif"><br />
+	<img src="images/home-pizza.gif">
+	<img src="images/home-chinese.gif">
+	<img src="images/home-sandwich.gif">
+	<img src="images/home-coffee.gif">
+	<img src="images/home-burger.gif">
+	<h2 class="alignRight">A tool for deciding where to eat</h2>
+</div>
+
+<div id="home-text">
+
+  	<% for city in @cities %>
+  		<h3>Streets in <%= city.name %></h3>
+  		<div>
+  			<% for street in city.streets %>
+  				<p><%= link_to street.name, :controller=>"restaurant", :action=>"list", :id=>street.url_name, :city=>street.city.name %></p>
+  			<% end %>
+  		</div>
+  	<% end %>
+
+</div>
+
+<div id="home-vote"><a name="vote"></a>
+	<h3>Vote for the next Seattle street on Lunch Filter!</h3>
+	<% unless @vote %>
+		<% form_tag :action=>"street_vote" do -%>
+			<p><label><%= radio_button("vote", "street", "Wallingford") %> 45th Ave (Wallingford)</label></p>
+			<p><label><%= radio_button("vote", "street", "Ballard Ave") %> Ballard Ave</label></p>
+			<p><label><%= radio_button("vote", "street", "Broadway") %> Broadway</label></p>
+			<p><label><%= radio_button("vote", "street", "Fremont Ave") %> Fremont Ave</label></p>
+			<p><label><%= radio_button("vote", "street", "Lake City Way") %> Lake City Way</label></p>
+			<p><label><%= radio_button("vote", "street", "Queen Anne N") %> Queen Anne N</label></p>
+			<p><%= submit_tag 'Submit' %></p>
+		<% end -%>
+	<% else %>
+		<p>Thanks for your vote! Here are the current results:</p>
+		<%= bar_graph  [['Wallingford', @wa_votes], 
+		                 ['Ballard', @ba_votes], 
+		                 ['Broadway', @br_votes], 
+		                 ['Fremont', @fr_votes], 
+		                 ['LakeCity', @la_votes],
+						 ['QueenAnne', @qu_votes]] %>
+	<% end %>
+	<% if logged_in? %>
+		<p>COOKIE: <%= @vote %></p>
+		<%= button_to "Clear Vote", :action => "clear_street_vote" %>
+	<% end %>
+</div>
+<script type="text/javascript" src="http://cetrk.com/pages/scripts/0005/7289.js"> </script>

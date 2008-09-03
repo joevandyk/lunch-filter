@@ -1,0 +1,22 @@
+#home-top, #home-text, #home-vote
+{
+margin:2em auto;
+text-align:left;
+width:550px;
+}
+
+#home-top
+{
+background:#BCD8E0;
+border:10px #396579 solid;
+text-align:center;
+}
+
+img 
+{
+margin-right:18px;
+text-align:center;
+}
+
+h3 {color:#527558;margin-right:20px;}
+h2 {margin-right:20px;}

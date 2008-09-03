@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: lunch_filter_dev
+
+production:
+  adapter: postgresql
+  database: lunch_filter_production

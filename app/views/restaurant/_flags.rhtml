@@ -1,0 +1,5 @@
+<% if restaurant.flags.empty? %>
+	<%= link_to(image_tag("icon_flag.gif"), {:action=>"flag", :id=>restaurant.id}, :title=>"Flag/update restaurant info") %>
+<% else %>
+	<%= link_to(image_tag("icon_flagged.gif"), {:action=>"flag", :id=>restaurant.id}, :title=>"Note: This restaurant has been flagged. The LunchFilter team is currently reviewing suggested changes.")  %>
+<% end %>

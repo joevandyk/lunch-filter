@@ -1,0 +1,195 @@
+/* ############# */
+/* HTML Elements */
+/* ############# */
+
+body
+{
+padding:0px;
+margin:0px;
+border:0px;
+font-family:arial;
+font-size:12pt;
+color:#333; /*changed from 396579*/
+background:#E6F6F9;
+}
+
+h1, h2{margin:0em;}
+h1, legend {color:#456476;}
+h2 {color:#49674E;font-size:1.1em;margin-bottom:0.7em}
+
+
+a {color:#333;}
+
+/* ######### */
+/* Container */
+/* ######### */
+
+#aveContainer h3
+{
+padding:0px;
+margin:0px;
+margin-right:.2em;
+font-size:1.2em;
+display:inline;
+}
+
+#aveContainer h2
+{
+padding:0px;
+margin:0px;
+margin-right:.2em;
+font-size:1.2em;
+display:inline;
+}
+
+#aveContainer img
+{
+vertical-align:text-bottom;
+margin:0em 0em 0em .1em;
+}
+
+.top
+{
+left:0px;
+margin-top:0px;
+position:absolute;
+}
+
+/* ############### */
+/* Menu and Footer */
+/* ############### */
+
+#slate{text-align:center;}
+
+#menu, #footer
+{
+background:#B3D9E2;
+border-bottom:12px solid #396579;
+padding:.5em;
+text-align:center;
+}
+
+#random, #found li{
+	display: inline;
+	padding: 5px;
+	background: #DECD19;
+	margin-right: 5px;
+	line-height: 35px;
+}
+
+.menu-header{
+	background:#456476;
+	padding: 3px;
+	color:#fff;
+}
+
+#menu-inside, #footer-inside
+{
+width:950px;
+margin:auto;
+text-align:left;
+}
+
+#logobox {
+	width:100%;
+	background:#BCD8E0;
+}
+
+#footer
+{
+border-bottom:0px;
+border-top:12px solid #396579;
+}
+
+
+/* ############# */
+/* Form controls */
+/* ############# */
+
+fieldset{
+	width:800px;
+	margin: 2em auto;
+}
+
+
+legend{
+	font-size: 1.5em;
+}
+
+form.selector label /*changed from span */
+{float:left;display:inline;width:175px;} /*changed from 125px*/
+
+form.selector p {clear:both;float:right;margin-top:1em;}
+
+
+/* ################## */
+/* Structural Classes */
+/* ################## */
+
+.block
+{
+width:1000px;
+position:relative;
+font-size:.8em;
+}
+
+.clearBoth{
+	clear:both;
+}
+
+.col1{
+	width: 250px;
+	float: left;
+} 
+.col2{
+	float: left;
+}
+
+
+.restaurant
+{
+padding: 2px;
+width:300px;
+position:absolute;
+}
+
+.successful{
+	background:#7EB480;
+	border: 3px solid #6D9977;
+}
+
+.successful h1, .notice h1{
+	color: white;
+}
+
+.notice {
+	background: #CA4036;
+	border: 3px solid #AE2C1A;
+}
+
+.floatLeft{float:left;}
+.floatRight{float:right;}
+.alignLeft{text-align:left;}
+.alignCenter{text-align:center;}
+.alignRight{text-align:right;}
+.left {position:absolute;left:0px;text-align:right;}
+.right {position:absolute;right:0px;text-align:left;}
+
+.width50{width:45%; padding:2.5%;}
+
+
+/* ##### */
+/* Hacks */
+/* ##### */
+
+.clearfix:after {
+content: "."; 
+display: block; 
+height: 0; 
+clear: both; 
+visibility: hidden;
+}
+
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+/* End hide from IE-mac */ 

@@ -1,0 +1,9 @@
+<fieldset class="alignLeft">
+	<legend>Editing a Cuisine Type</legend>
+	<%= start_form_tag :action=>"edit_cuisine" %>
+		<label>Cuisine Name</label><br /><%= text_field("cuisine", "name", :size=>25) %><br />
+		<%= submit_tag "Edit Cuisine" %>
+	<%= end_form_tag %>
+	
+	<p><%= link_to "Back", :controller=>params["controller"] %></p>
+</fieldset>

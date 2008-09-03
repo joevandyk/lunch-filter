@@ -1,0 +1,6 @@
+<fieldset class="alignLeft">
+	<legend>Create a New Restaurant on <%= @street.name %></legend>
+	<%= start_form_tag :action=>"create_restaurant" %>
+		<%=render :partial => "form"%>
+	<%= end_form_tag %>
+</fieldset>

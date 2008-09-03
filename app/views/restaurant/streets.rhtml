@@ -1,0 +1,18 @@
+<div id="menu" class="clearfix">
+	<div id="menu-inside">		
+		<div id="logobox">
+			<h1><%=link_to("#{image_tag('LF_logo.gif', :border=>"0")}#{image_tag('lunchfilter.gif', :border=>"0")}", :controller=>"restaurant")%></h1>
+	    </div>
+		<div id="breadcrumbs">
+			<p><%=link_to "LunchFilter", :controller=>"restaurant" %> &raquo; <b>Streets in <%= @city.name %></b></p>
+		</div>
+	</div><!--end menu inside-->
+</div><!-- end menu -->
+
+
+<fieldset class="alignLeft">
+	<legend>Streets in <%= @city.name %></legend>
+	<% for street in @streets %>
+		<p><%= link_to street.name, :controller=>"restaurant", :action=>"list", :id=>street.url_name, :city=>street.city.name %></p>
+	<% end %>
+</fieldset>
