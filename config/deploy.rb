@@ -1,29 +1,22 @@
-set :application, "lunch_filter"
+set :application, "lunchfilter"
 set :repository,  "git@github.com:joevandyk/lunch-filter.git"
 set :scm, :git
 set :ssh_options, { :forward_agent => true }
 set :deploy_to, "/sites/#{application}"
-set :user, 'joe'
+set :user, 'www-data'
 
 set :use_sudo, false
-role :app, "pinkpucker.net"
-role :web, "pinkpucker.net"
-role :db,  "pinkpucker.net", :primary => true
+role :app, "dev.fixieconsulting.com"
+role :web, "dev.fixieconsulting.com"
+role :db,  "dev.fixieconsulting.com", :primary => true
 
 namespace :deploy do
-    task :start, :roles => :app do
-      invoke_command "/usr/sbin/svcadm enable lunch_filter"
-    end
-
-    task :stop, :roles => :app do
-      invoke_command "/usr/sbin/svcadm disable lunch_filter"
-    end
-
     task :restart, :roles => :app do
-      invoke_command "/usr/sbin/svcadm restart lunch_filter"
+      invoke_command "touch #{release_path}/tmp/restart.txt"
     end
 
     task :after_update_code, :roles => [:app] do
       run "ln -nfs #{release_path}/config/database.yml.live #{ release_path }/config/database.yml"
+      run "ln -nfs #{shared_path}/uploads #{ release_path }/public/uploads"
     end
 end
