@@ -1,3 +1,3 @@
 production:
   adapter: postgresql
-  database: lunch_filter_production
+  database: lunchfilter
