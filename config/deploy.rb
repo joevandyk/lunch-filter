@@ -2,13 +2,13 @@ set :application, "lunchfilter"
 set :repository,  "git@github.com:joevandyk/lunch-filter.git"
 set :scm, :git
 set :ssh_options, { :forward_agent => true }
-set :deploy_to, "/sites/#{application}"
-set :user, 'www-data'
+set :deploy_to, "/data/#{application}"
+set :user, 'monkey'
 
 set :use_sudo, false
-role :app, "dev.fixieconsulting.com"
-role :web, "dev.fixieconsulting.com"
-role :db,  "dev.fixieconsulting.com", :primary => true
+role :app, "lunchfilter.com"
+role :web, "lunchfilter.com"
+role :db,  "lunchfilter.com", :primary => true
 
 namespace :deploy do
     task :restart, :roles => :app do
